@@ -37,8 +37,9 @@ public class ProductAnalytics {
      public double calculateTotalStockValueForCategory(String category){
         return productCatalog.stream()
                 .filter(p->p.category().equalsIgnoreCase(category))
-                .mapToDouble(p->p.price() * p.stock())
-                .sum();
+                .map(p->p.price() * p.stock())
+                .reduce(0.0, (sum, value)->sum + value);
+                
      }
 
     /**
